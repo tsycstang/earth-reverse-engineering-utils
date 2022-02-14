@@ -27,6 +27,8 @@ with input_file.open() as in_, output_file.open("w") as out:
         if line.startswith("v "):
             vertex = np.fromstring(line[2:], sep=" ")
             vertex = R @ (vertex - origin)
+            vertex[1] = -vertex[1]
+            vertex[0, 1, 2] = vertex[2, 1, 0]
             line = "v {} {} {}\n".format(*vertex)
 
         out.write(line)
